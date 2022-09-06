@@ -1,0 +1,1 @@
+# Godot SDK gdscirpt version

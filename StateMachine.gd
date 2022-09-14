@@ -28,3 +28,7 @@ func push_state(state):
 	self.states.push(state)
 	state.on_enter(prev_state)
 
+func pop_state():
+	var prev_state =self.states.pop()
+	self.states.peek().on_enter(prev_state)
+

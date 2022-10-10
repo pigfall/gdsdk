@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://gdsdk/node_extensions/Circle.gd" type="Script" id=1]
+
+[node name="PG_NodeExt_Circle" type="Node2D"]
+script = ExtResource( 1 )

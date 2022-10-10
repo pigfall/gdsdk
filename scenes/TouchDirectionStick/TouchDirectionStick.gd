@@ -14,10 +14,12 @@ static func new()-> PG_TouchDirectionStick:
 var  stick:PG_NodeExt_Circle
 var is_touching:bool = false
 var touching_id =null
+var touch_time_in_msec:int=0
 
 var callback_on_touch:FuncRef=null
 var callback_on_release:FuncRef=null
 var callback_on_drag:FuncRef=null
+var callback_on_double_touch:FuncRef= null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,5 +57,10 @@ func handle_screen_touch_input(touch: InputEventScreenTouch):
 			self.stick.global_position = touch.position
 			self.is_touching = true
 			self.touching_id =touch.index
+			var prev_touch_time = self.touch_time_in_msec
+			self.touch_time_in_msec = Time.get_ticks_msec()
+			if (self.touch_time_in_msec - prev_touch_time <300):
+				if  self.callback_on_double_touch != null:
+					self.callback_on_double_touch.call_func((self.stick.global_position-self.global_position).normalized())
 			if (self.callback_on_touch != null):
 				self.callback_on_touch.call_func((self.stick.global_position-self.global_position).normalized())

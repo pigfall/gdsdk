@@ -1,10 +1,15 @@
 tool
 extends PG_NodeExt_Circle
 
+class_name PG_TouchDirectionStick
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+
+static func new()-> PG_TouchDirectionStick:
+	var scene = load("res://gdsdk/scenes/TouchDirectionStick/TouchDirectionStick.tscn")
+	return scene.instance()
 
 var  stick:PG_NodeExt_Circle
 var is_touching:bool = false
@@ -33,7 +38,7 @@ func handle_screen_drag_input(drag:InputEventScreenDrag):
 			self.stick.global_position = drag.position
 			self.stick.global_position = self.global_position + (self.stick.global_position - self.global_position).clamped(self.radius/2)
 		if (self.callback_on_drag != null):
-			self.callback_on_drag.call_func(self.stick.global_position-self.global_position)
+			self.callback_on_drag.call_func((self.stick.global_position-self.global_position).normalized())
 
 	
 func handle_screen_touch_input(touch: InputEventScreenTouch):
@@ -51,4 +56,4 @@ func handle_screen_touch_input(touch: InputEventScreenTouch):
 			self.is_touching = true
 			self.touching_id =touch.index
 			if (self.callback_on_touch != null):
-				self.callback_on_touch.call_func(self.stick.position-self.position)
+				self.callback_on_touch.call_func((self.stick.global_position-self.global_position).normalized())

@@ -18,7 +18,10 @@ func on_unhandled_input(input_ev):
 	self.states.peek().on_unhandled_input(input_ev)
 
 func exec_cmd(cmd):
-	self.states.peek().exec_cmd(cmd)
+	var state = self.states.peek()
+	if state.has_method("exec_cmd"):
+		state.exec_cmd(cmd)
+
 
 
 # Push the state to the top of stack.
@@ -31,4 +34,3 @@ func push_state(state):
 func pop_state():
 	var prev_state =self.states.pop()
 	self.states.peek().on_enter(prev_state)
-

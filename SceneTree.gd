@@ -21,10 +21,10 @@ static func must_change_scene(node: Node,scene_path:String):
 	if err_code != OK :
 		panic(node,"Error: change scene to %s, err code: %s" % [scene_path,err_code])
 
-static func must_connect_signal(from:Node,signal_name: String,to:Object,method_name:String, binds: Array =[]):
-	var err_code = from.connect(signal_name,to,method_name,binds)
+static func must_connect_signal(nodeInTree:Node,signal_owner:Node,signal_name: String,method_owner:Object,method_name:String, binds: Array =[]):
+	var err_code = signal_owner.connect(signal_name,method_owner,method_name,binds)
 	if err_code != OK:
-		panic(from,"failed to connect signal")
+		panic(nodeInTree,"failed to connect signal")
 		return
 
 static func must_instance_scene_from_path(nodeInTree: Node,scene_path: String):

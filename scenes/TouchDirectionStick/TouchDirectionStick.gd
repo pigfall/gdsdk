@@ -24,6 +24,7 @@ var callback_on_double_touch:FuncRef= null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.stick = PG_SceneTree.must_find_node(self,"Stick")
+	self.adjust()
 
 func _unhandled_input(event):
 	if event is InputEventScreenTouch:
@@ -34,11 +35,11 @@ func _unhandled_input(event):
 
 func handle_screen_drag_input(drag:InputEventScreenDrag):
 	if drag.index == self.touching_id:
-		if drag.position.distance_to(self.global_position) < (self.radius/2):
+		if drag.position.distance_to(self.global_position) < (self.radius):
 			self.stick.global_position = drag.position
 		else:
 			self.stick.global_position = drag.position
-			self.stick.global_position = self.global_position + (self.stick.global_position - self.global_position).clamped(self.radius/2)
+			self.stick.global_position = self.global_position + (self.stick.global_position - self.global_position).clamped(self.radius)
 		if (self.callback_on_drag != null):
 			self.callback_on_drag.call_func((self.stick.global_position-self.global_position).normalized())
 
@@ -53,7 +54,7 @@ func handle_screen_touch_input(touch: InputEventScreenTouch):
 				if (self.callback_on_release != null ):
 					self.callback_on_release.call_func()
 	else:
-		if (touch.position.distance_to(self.global_position) < (self.radius/2)):
+		if (touch.position.distance_to(self.global_position) < (self.radius)):
 			self.stick.global_position = touch.position
 			self.is_touching = true
 			self.touching_id =touch.index
@@ -64,3 +65,7 @@ func handle_screen_touch_input(touch: InputEventScreenTouch):
 					self.callback_on_double_touch.call_func((self.stick.global_position-self.global_position).normalized())
 			if (self.callback_on_touch != null):
 				self.callback_on_touch.call_func((self.stick.global_position-self.global_position).normalized())
+
+func adjust():
+	var resolution = OS.get_real_window_size()
+	self.global_position = Vector2(self.radius+100,resolution.y-self.radius-100)

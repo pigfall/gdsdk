@@ -26,4 +26,10 @@ static func must_connect_signal(from:Node,signal_name: String,to:Object,method_n
 	if err_code != OK:
 		panic(from,"failed to connect signal")
 		return
+
+static func must_instance_scene_from_path(nodeInTree: Node,scene_path: String):
+	var scene_resource  = load(scene_path)
+	if (scene_resource == null):
+		panic(nodeInTree,"failed to load scene from path %s" % scene_path)
+	return scene_resource.instance()
 	

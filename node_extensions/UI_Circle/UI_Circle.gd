@@ -1,15 +1,15 @@
-tool
+@tool
 extends Control
 
 class_name PG_NodeExt_UI_Circle
 
-export var radius =100 setget set_radius
+@export var radius =100 : set = set_radius
 
 func set_radius(value):
     radius = value
     update()
 
-export(Color) var color = Color(0.1,0.2,0.3) setget set_color
+@export var color: Color = Color(0.1,0.2,0.3) : set = set_color
 
 
 func set_color(value):

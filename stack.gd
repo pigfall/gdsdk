@@ -13,7 +13,7 @@ func pop():
 
 # Returns the object at the top of stack without removing it.
 func peek():
-    if self.elems.empty():
+    if self.elems.is_empty():
         return null
     return self.elems.back()
 

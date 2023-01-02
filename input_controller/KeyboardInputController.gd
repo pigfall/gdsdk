@@ -1,8 +1,8 @@
 class_name PG_KeyboardInputController
 
-var on_walk:FuncRef
-var on_run:FuncRef
-var on_idle:FuncRef
+var on_walk:Callable
+var on_run:Callable
+var on_idle:Callable
 
 
 

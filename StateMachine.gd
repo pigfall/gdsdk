@@ -18,15 +18,13 @@ func on_unhandled_input(input_ev):
 	self.states.peek().on_unhandled_input(input_ev)
 
 func exec_cmd(cmd):
-	var state = self.states.peek()
-	if state.has_method("exec_cmd"):
-		state.exec_cmd(cmd)
+	self.states.peek().exec_cmd(cmd)
 
 
 
 # Push the state to the top of stack.
 # Invoke the state's on_enter method.
-func push_state(state):
+func push_state(state:State):
 	var prev_state = self.states.peek()
 	self.states.push(state)
 	state.on_enter(prev_state)
@@ -34,3 +32,15 @@ func push_state(state):
 func pop_state():
 	var prev_state =self.states.pop()
 	self.states.peek().on_enter(prev_state)
+
+class State:
+	func on_enter(prev_state):
+		pass
+	func exec_cmd(cmd):
+		pass
+	func on_input(input_ev):
+		pass
+	func on_unhandled_input(input_ev):
+		pass
+	func update_on_new_frame(dt):
+		pass

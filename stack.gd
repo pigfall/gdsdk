@@ -9,7 +9,7 @@ func push(elem):
 
 # Removes and returns the object at the top of the stack.
 func pop():
-	self.elems.pop_back()
+	return self.elems.pop_back()
 
 # Returns the object at the top of stack without removing it.
 func peek():

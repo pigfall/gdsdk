@@ -1,6 +1,8 @@
 class_name PG_Enum
 
 const SIGNAL_ANIMATION_FINISHED="animation_finished"
+const SIGNAL_ANIMATEDSPRITE_FRAME_CHANGED = "frame_changed"
+
 const SIGNAL_AREA_ENTERED="area_entered"
 
 const SIGNAL_BUTTON_PRESSED= "pressed"

@@ -31,7 +31,6 @@ func push_state(state:State):
 
 func pop_state():
 	var prev_state =self.states.pop()
-	print(prev_state)
 	prev_state.on_leave()
 	self.states.peek().on_enter(prev_state)
 

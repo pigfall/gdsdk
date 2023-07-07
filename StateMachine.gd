@@ -21,6 +21,8 @@ func exec_cmd(cmd):
 	self.states.peek().exec_cmd(cmd)
 
 
+func state()->State:
+	return self.states.peek()
 
 # Push the state to the top of stack.
 # Invoke the state's on_enter method.
@@ -47,3 +49,5 @@ class State:
 		pass
 	func update_on_new_frame(dt):
 		pass
+	func take_effect(effect:Effect):
+		print("take effect")

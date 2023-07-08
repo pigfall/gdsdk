@@ -15,9 +15,13 @@ static func exit(code:int,errMsg:String):
 	dialog.process_mode = Node.PROCESS_MODE_ALWAYS
 	print(errMsg)
 	tree.paused = true
+	SDKGlobal.exited = true
 
 static func scene_tree()->SceneTree:
 	return SDKGlobal.Singleton.get_tree()
 	
 static func current_scene()->Node:
 	return SDKGame.scene_tree().get_current_scene()
+
+static func exited()->bool:
+	return SDKGlobal.exited

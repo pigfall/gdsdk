@@ -50,4 +50,4 @@ class State:
 	func update_on_new_frame(dt):
 		pass
 	func take_effect(effect:Effect):
-		print("take effect")
+		pass

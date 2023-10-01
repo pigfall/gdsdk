@@ -1,21 +1,29 @@
 class_name PG_SceneTree
 
+static var paniced = false
+
 func must_find_node(nodeInSceneTree: Node,path: String):
 	var node = nodeInSceneTree.get_node(path)
 	if node == null:
 		panic(nodeInSceneTree,"not found node by path %s" % path)
 	return node
 
-func panic(node_in_scene_tree: Node ,msg: String):
+static func panic(node_in_scene_tree: Node ,msg: String):
+	paniced = true
 	var dialog = AcceptDialog.new()
 	dialog.dialog_text = msg
 	dialog.title="game crash"
+	
+	dialog.canceled.connect(func():
+			node_in_scene_tree.get_tree().quit()
+	)
+	dialog.confirmed.connect(func():
+			node_in_scene_tree.get_tree().quit()
+	)
+	dialog.process_mode = Node.PROCESS_MODE_ALWAYS
 	node_in_scene_tree.add_child(dialog)
 	dialog.popup()
 	node_in_scene_tree.get_tree().paused = true
-	var p = false
-	assert(p,msg) #,"panic: %s" % msg)
-	# TODO add callbck to dialog to quit game
 
 func must_change_scene(node: Node,scene_path:String):
 	var err_code = node.get_tree().change_scene_to_file(scene_path)

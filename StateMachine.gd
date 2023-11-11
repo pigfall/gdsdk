@@ -37,13 +37,13 @@ func pop_state():
 class State:
 	func on_leave():
 		pass
-	func on_enter(prev_state):
+	func on_enter(_prev_state):
 		pass
-	func exec_cmd(cmd):
+	func exec_cmd(_cmd):
 		pass
-	func on_input(input_ev):
+	func on_input(_input_ev):
 		pass
-	func on_unhandled_input(input_ev):
+	func on_unhandled_input(_input_ev):
 		pass
-	func update_on_new_frame(dt):
+	func update_on_new_frame(_dt):
 		pass

@@ -13,4 +13,5 @@ static func load_mp3(path:String)->Result:
 		return Result.with_err(err)
 	var stream = AudioStreamMP3.new()
 	stream.data = file.get_buffer(file.get_length())
+	file.close()
 	return Result.with_value(stream)

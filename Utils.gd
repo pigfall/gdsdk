@@ -3,6 +3,7 @@ extends Node
 class_name Utils
 
 static func panic(node_in_tree:Node,msg: String):
+	print_stack()
 	PG_SceneTree.panic(node_in_tree,msg)
 	
 # Result<AudioStreamMP3>

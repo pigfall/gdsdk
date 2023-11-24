@@ -3,9 +3,16 @@ extends Node
 class_name Utils
 
 static func panic(node_in_tree:Node,msg: String):
+	# The print_stack only works when in debug version and connecting to a debug server
 	print_stack()
+	push_error("DEBUG: Root error: %s" % msg)
 	PG_SceneTree.panic(node_in_tree,msg)
 	
+static func panic_if(match: bool, node_in_tree, msg:String):
+	if not match:
+		return
+	panic(node_in_tree,msg)
+
 # Result<AudioStreamMP3>
 static func load_mp3(path:String)->Result:
 	var file = FileAccess.open(path,FileAccess.READ)

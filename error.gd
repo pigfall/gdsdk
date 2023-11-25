@@ -2,7 +2,7 @@ class_name PG_Error
 
 var error
 
-static func create(error)->PG_Error:
+static func create(error_)->PG_Error:
 	var e =PG_Error.new()
-	e.error = error
+	e.error = error_
 	return e

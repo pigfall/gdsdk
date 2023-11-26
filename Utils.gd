@@ -24,7 +24,7 @@ static func load_mp3(path:String)->Result:
 	file.close()
 	return Result.with_value(stream)
 
-static func load(path: String)->Result:
+static func load_resource(path: String)->Result:
 	var resource = load(path) 
 	if resource == null:
 		return Result.with_err("load %s error" % path)

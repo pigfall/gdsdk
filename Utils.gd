@@ -23,3 +23,19 @@ static func load_mp3(path:String)->Result:
 	stream.data = file.get_buffer(file.get_length())
 	file.close()
 	return Result.with_value(stream)
+
+static func load(path: String)->Result:
+	var resource = load(path) 
+	if resource == null:
+		return Result.with_err("load %s error" % path)
+	return Result.with_value(resource)
+	
+
+static func load_or_panic(nodeInTree: Node,path: String):
+	var resource = load(path)
+	if resource != null:
+		return resource
+	panic(nodeInTree,"load %s error" % path)
+		
+	
+	

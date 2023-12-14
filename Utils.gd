@@ -12,6 +12,18 @@ static func panic_if(match: bool, node_in_tree, msg:String):
 	if not match:
 		return
 	panic(node_in_tree,msg)
+	
+static func dialog(node_in_tree:Node ,title: String, message: String,on_confirmed:Callable,on_canceled:Callable):
+	var accept_dialog = AcceptDialog.new()
+	accept_dialog.title = title
+	accept_dialog.dialog_text = message
+	accept_dialog.confirmed.connect(on_confirmed)
+	accept_dialog.canceled.connect(on_canceled)
+	accept_dialog.process_mode = Node.PROCESS_MODE_ALWAYS
+	node_in_tree.add_child(accept_dialog)
+	accept_dialog.popup_centered()
+	
+	
 
 # Result<AudioStreamMP3>
 static func load_mp3(path:String)->Result:
@@ -37,5 +49,8 @@ static func load_or_panic(nodeInTree: Node,path: String):
 		return resource
 	panic(nodeInTree,"load %s error" % path)
 		
-	
+static func change_scene(node_in_tree:Node,scene_path: String):
+	var err = node_in_tree.get_tree().change_scene_to_file(scene_path)
+	if err != null:
+		panic(node_in_tree,"failed to change to scene %s, error code %s" % [scene_path,err])
 	

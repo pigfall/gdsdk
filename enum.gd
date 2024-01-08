@@ -1,5 +1,7 @@
 class_name PG_Enum
 
+const SERVER_PEER_ID = 1
+
 const SIGNAL_ANIMATION_FINISHED="animation_finished"
 const SIGNAL_ANIMATEDSPRITE_FRAME_CHANGED = "frame_changed"
 

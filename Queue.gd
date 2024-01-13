@@ -3,8 +3,11 @@ class_name PG_Queue
 var count:int=0
 var first_elem
 var last_elem
+var max_num=9999999
 
 func push_back(elem):
+	if count + 1 > max_num:
+		pop_front()
 	var old_count = count
 	count = count+1
 	if old_count == 0:
@@ -37,6 +40,9 @@ func pop_front():
 	first_elem = first_elem.get("next")
 	count = count - 1
 	return elem
+
+func front_elem():
+	return first_elem.get("elem")
 
 func print():
 	var list = []

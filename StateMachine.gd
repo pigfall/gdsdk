@@ -1,6 +1,8 @@
 class_name PG_StateMachine
 
 
+signal sig_state_change
+
 # States is a stack of state.
 # The top state in the statck is the current state.
 var states = PG_Stack.new()
@@ -28,11 +30,14 @@ func push_state(state:State):
 	var prev_state = self.states.peek()
 	self.states.push(state)
 	state.on_enter(prev_state)
+	sig_state_change.emit(prev_state,state)
 
 func pop_state():
 	var prev_state =self.states.pop()
 	prev_state.on_leave()
-	self.states.peek().on_enter(prev_state)
+	var cur_state = self.states.peek()
+	cur_state.on_enter(prev_state)
+	sig_state_change.emit(prev_state,cur_state)
 
 class State:
 	func on_leave():

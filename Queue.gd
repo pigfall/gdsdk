@@ -51,3 +51,12 @@ func print():
 		list.push_back(elem)
 		elem=elem.get("next")
 	print("total ",count, "elems: ",list)
+
+func to_list():
+	var l = []
+	var elem = first_elem
+	for i in range (count):
+		l.push_back(elem.get("elem"))
+		elem = elem.get("next")
+	return l
+	 
